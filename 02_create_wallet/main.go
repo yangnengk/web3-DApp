@@ -9,6 +9,7 @@ import (
 	"log"
 )
 
+// 创建一个钱包
 func main() {
 	privateKey, err := crypto.GenerateKey()
 	if err != nil {
