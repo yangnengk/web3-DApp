@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"fmt"
-	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -50,7 +49,7 @@ func main() {
 		log.Fatal(err)
 	}
 	toAddress := common.HexToAddress("0xf5f0A5135486fF2715b1dfAead54eEaFfe6B8404")
-	tokenAddress := common.HexToAddress("0xfadea654ea83c00e5003d2ea15c59830b65471c0")
+	tokenAddress := common.HexToAddress("0xE165AE29c619F455acD5F0b1C81958C229fCc0B0")
 
 	transferFnSignature := []byte("transfer(address,uint256)")
 	hash := sha3.NewLegacyKeccak256()
@@ -68,13 +67,14 @@ func main() {
 	data = append(data, paddedAddress...)
 	data = append(data, paddedAmount...)
 
-	gasLimit, err := client.EstimateGas(context.Background(), ethereum.CallMsg{
-		To:   &toAddress,
-		Data: data,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
+	//gasLimit, err := client.EstimateGas(context.Background(), ethereum.CallMsg{
+	//	To:   &toAddress,
+	//	Data: data,
+	//})
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	gasLimit := uint64(210000)
 	fmt.Println("gasLimit =", gasLimit)
 	tx := types.NewTx(&types.LegacyTx{
 		Nonce:    nonce,
