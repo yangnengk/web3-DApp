@@ -32,6 +32,9 @@ func main() {
 			log.Fatal(err)
 		case header := <-headers:
 			fmt.Println(header.Hash().Hex())
+			//BlockByHash 需要精确匹配区块哈希，对节点数据同步要求更高
+			//BlockByNumber 只需要区块高度，通常更稳定可靠
+			//在高速变化的区块链网络中，这种差异是正常的
 			block, err := client.BlockByHash(context.Background(), header.Hash()) // client.BlockByHash 貌似查不到数据，改用BlockByNumber
 			if block == nil {
 				block, err = client.BlockByNumber(context.Background(), header.Number)
