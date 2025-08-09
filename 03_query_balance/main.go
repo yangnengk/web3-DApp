@@ -12,6 +12,7 @@ import (
 	"os"
 )
 
+// 查询账户余额
 func main() {
 	envErr := godotenv.Load()
 	if envErr != nil {
